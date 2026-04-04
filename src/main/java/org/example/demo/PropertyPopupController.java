@@ -20,7 +20,7 @@ public class PropertyPopupController {
         String propertyName = propertyNameField.getText();
         String valuation = valuationField.getText();
         try {
-            if (!propertyName.trim().isEmpty() || !valuation.trim().isEmpty()) {
+            if (!propertyName.trim().isEmpty() && !valuation.trim().isEmpty()) {
 
 
                 double value = Double.parseDouble(valuation);

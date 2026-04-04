@@ -12,7 +12,6 @@ public class User {
 
 
     User(String username,String email, String password, LocalDate date_of_birth){
-        this.userID=userID;
         this.username=username;
         this.email=email;
         this.password=password;
@@ -20,9 +19,7 @@ public class User {
 
     }
 
-    public Integer getUserID() {
-        return userID;
-    }
+
 
     public String getEmail() {
         return email;
@@ -45,6 +42,6 @@ public class User {
     }
     @Override
     public String toString(){
-        return "";
+        return username+" "+email+" "+password+date_of_birth.toString();
     }
 }
