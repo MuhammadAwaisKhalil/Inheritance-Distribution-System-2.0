@@ -3,10 +3,8 @@ package org.example.demo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,7 +24,10 @@ public class HelloController {
     private TextField usernameField1;
     @FXML
     private PasswordField passwordField1;
-
+    @FXML
+    private ComboBox<Property> propertyCombo;
+    @FXML
+    private AnchorPane mainlayout;
     //---------------------DATA VARS---------------------
     private String username;
     private String email;
@@ -37,6 +38,7 @@ public class HelloController {
     private void registerUser(){
         try {
             this.username = usernameField2.getText();
+            UserSession.setCurrentUsername(username);
             this.email = emailField.getText();
             this.password = passwordField2.getText();
             this.dateOfBirth = dateOfBirthField.getValue();
@@ -52,13 +54,10 @@ public class HelloController {
     }
     @FXML
     private void userLogin() throws IOException {
-
-
         Stage stage = (Stage)usernameField1.getScene().getWindow();
 
         try {
             this.username = usernameField1.getText();
-
             this.password = passwordField1.getText();
 
 
@@ -78,6 +77,16 @@ public class HelloController {
         System.out.println("Scene switched");
         stage.setScene(newLoginScene);
 
+    }
+
+    @FXML
+    private void addAssetandInheritorData() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("property_and_inheritor.fxml"));
+        Scene scene = new Scene(loader.load(),679,625);
+        Stage assetStage = new Stage();
+        assetStage.setTitle("Add Assets");
+        assetStage.setScene(scene);
+        assetStage.show();
     }
 
 
