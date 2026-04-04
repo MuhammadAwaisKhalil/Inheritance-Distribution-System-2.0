@@ -1,14 +1,84 @@
 package org.example.demo;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.time.LocalDate;
 
 public class HelloController {
+    //-------------------FXML VARS-------------------
     @FXML
-    private Label welcomeText;
+    private TextField usernameField2;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private PasswordField passwordField2;
+    @FXML
+    private DatePicker dateOfBirthField;
+    @FXML
+    private TextField usernameField1;
+    @FXML
+    private PasswordField passwordField1;
+
+    //---------------------DATA VARS---------------------
+    private String username;
+    private String email;
+    private String password;
+    private LocalDate dateOfBirth;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private void registerUser(){
+        try {
+            this.username = usernameField2.getText();
+            this.email = emailField.getText();
+            this.password = passwordField2.getText();
+            this.dateOfBirth = dateOfBirthField.getValue();
+
+            System.out.println("Username: "+username);
+            System.out.println("Password:"+password);
+            System.out.println("Email:"+email);
+            System.out.println("Date: "+dateOfBirth.toString());
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
+    @FXML
+    private void userLogin() throws IOException {
+
+
+        Stage stage = (Stage)usernameField1.getScene().getWindow();
+
+        try {
+            this.username = usernameField1.getText();
+
+            this.password = passwordField1.getText();
+
+
+            System.out.println("Username: "+username);
+            System.out.println("Password:"+password);
+
+        } catch (Exception e) {
+            System.out.println("Sometinh wong");
+        }
+
+    }
+    @FXML
+    private void switchToRegister() throws IOException {
+        FXMLLoader loader = new FXMLLoader(HelloController.class.getResource("loginPage.fxml"));
+        Scene newLoginScene = new Scene(loader.load(),350,451);
+        Stage stage = (Stage)usernameField1.getScene().getWindow();
+        System.out.println("Scene switched");
+        stage.setScene(newLoginScene);
+
+    }
+
+
 }
