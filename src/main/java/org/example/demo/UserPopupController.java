@@ -7,6 +7,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+import org.example.demo.database.UserDao;
+
 import java.time.LocalDate;
 
 
@@ -33,7 +35,7 @@ public class UserPopupController {
         try {
             if (!username.trim().isEmpty() && !email.trim().isEmpty() && !password.trim().isEmpty() && dateOfBirth != null) {
 
-
+                UserDao.writeUserToDatabase(username,email,password,dateOfBirth,UserSession.getCurrentUserId());
                 addUser = new User(username, email, password, dateOfBirth);
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

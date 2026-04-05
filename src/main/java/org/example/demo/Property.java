@@ -23,6 +23,6 @@ public class Property {
         this.valuation = valuation;
     }
     public String toString(){
-        return "";
+        return property_name+"    Rs"+valuation;
     }
 }

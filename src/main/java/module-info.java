@@ -5,6 +5,7 @@ module org.example.demo {
 
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.sql;
 
     opens org.example.demo to javafx.fxml;
     exports org.example.demo;

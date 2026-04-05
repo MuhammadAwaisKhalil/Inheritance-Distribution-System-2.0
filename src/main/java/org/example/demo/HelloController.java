@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.example.demo.database.UserDao;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -59,11 +60,26 @@ public class HelloController {
         try {
             this.username = usernameField1.getText();
             this.password = passwordField1.getText();
+            try{
+                if(username!=null && password!=null){
 
-
-            System.out.println("Username: "+username);
-            System.out.println("Password:"+password);
-
+                    int userID = UserDao.getIdByEmail(this.username);
+                    if(userID>0){
+                        System.out.println("Logged IN");
+                        UserSession.setCurrentUserId(userID);
+                        System.out.println("Username: "+username);
+                        System.out.println("Password:"+password);
+                    }
+                    else{
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("No User");
+                        alert.setContentText("No User Found. Please check your credentials.");
+                        alert.showAndWait();
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Login me errror hai waleeeed");
+            }
         } catch (Exception e) {
             System.out.println("Sometinh wong");
         }
@@ -77,16 +93,45 @@ public class HelloController {
         System.out.println("Scene switched");
         stage.setScene(newLoginScene);
 
+
     }
 
     @FXML
     private void addAssetandInheritorData() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("property_and_inheritor.fxml"));
-        Scene scene = new Scene(loader.load(),679,625);
-        Stage assetStage = new Stage();
-        assetStage.setTitle("Add Assets");
-        assetStage.setScene(scene);
-        assetStage.show();
+
+        try{
+            this.username=usernameField2.getText();
+            this.email=emailField.getText();
+            this.password=passwordField2.getText();
+            this.dateOfBirth = dateOfBirthField.getValue();
+
+            try{
+                if(username!=null && email!=null&&password!=null&&dateOfBirth!=null){
+                    UserDao.writeUserToDatabase(username,email,password,dateOfBirth,null);
+                    System.out.println("User added to db");
+                    Scene scene = new Scene(loader.load(),679,625);
+                    Stage assetStage = new Stage();
+                    assetStage.setTitle("Add Assets");
+                    assetStage.setScene(scene);
+                    assetStage.show();
+                    int id=UserDao.getIdByEmail(email);
+                    UserSession.setCurrentUserId(id);
+
+                }
+                else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Registration Error");
+                    alert.setContentText("Please enter all credentials");
+                    alert.showAndWait();
+
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (Exception e) {
+            System.out.println("The registere screen aint workin dawg");
+        }
     }
 
 
