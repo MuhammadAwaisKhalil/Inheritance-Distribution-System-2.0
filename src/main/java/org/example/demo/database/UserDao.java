@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 public class UserDao {
     private static final Logger LOGGER = Logger.getLogger(UserDao.class.getName());
 
-    public static void writeUserToDatabase(String userName, String email, String pass, LocalDate dob1, Integer pId){
+    public static boolean writeUserToDatabase(String userName, String email, String pass, LocalDate dob1, Integer pId){
         String query = "Insert into accounts(user_name, password, date_of_birth, email,parent ) VALUES(?, ?, ?, ?, ?)";
         try{
             Connection con = DbConnection.getConnection();
@@ -27,11 +27,13 @@ public class UserDao {
                 pst.executeUpdate();
 
                 System.out.println("Successfully created");
+                return true;
 
             }
         }
         catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, "Database insertion failed for user: " + userName, ex);
+            return false;
         }
     }
 
@@ -55,7 +57,47 @@ public class UserDao {
             }
         }catch (SQLException ex){
             LOGGER.log(Level.SEVERE, "Database ID read failed for: " + userEmail, ex);
-            return 0;
+            return -1;
         }
     }
+
+    public static boolean deleteUserById(int id){
+        String query = "DELETE FROM accounts where id = (?)";
+
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)) {
+                pst.setInt(1,id);
+
+                pst.executeUpdate();
+                System.out.println("User "+id+" deleted successfully");
+                return true;
+            }
+        }catch (SQLException ex){
+            LOGGER.log(Level.SEVERE, "Error deleting user: "+ id,ex);
+            return false;
+        }
+    }
+
+    public static boolean deleteUserByEmail(String userEmail){
+        String query = "DELETE FROM accounts where email = (?)";
+
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)) {
+                pst.setString(1, userEmail);
+
+                pst.executeUpdate();
+                System.out.println("User "+userEmail+" deleted successfully");
+                return true;
+            }
+        }catch (SQLException ex){
+            LOGGER.log(Level.SEVERE, "Error deleting user: "+ userEmail,ex);
+            return false;
+        }
+    }
+
+
+
+
 }
