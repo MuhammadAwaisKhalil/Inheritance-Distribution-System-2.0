@@ -74,6 +74,8 @@ public class HelloController {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("No User");
                         alert.setContentText("No User Found. Please check your credentials.");
+                        username=null;
+                        password=null;
                         alert.showAndWait();
                     }
                 }
@@ -123,6 +125,10 @@ public class HelloController {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Registration Error");
                     alert.setContentText("Please enter all credentials");
+                    username=null;
+                    password=null;
+                    email=null;
+                    dateOfBirth=null;
                     alert.showAndWait();
 
                 }
