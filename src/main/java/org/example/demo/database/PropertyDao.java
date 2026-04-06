@@ -2,6 +2,7 @@ package org.example.demo.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +45,31 @@ public class PropertyDao {
         }catch (SQLException ex){
             LOGGER.log(Level.SEVERE, "Error deleting property: "+ id,ex);
             return false;
+        }
+    }
+
+    public static int getPropertyId(String propName, int parentId){
+        String query = "select id from properties where property_name = (?) and parent_owner = (?)";
+
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)) {
+                pst.setString(1, propName);
+                pst.setInt(2, parentId);
+
+                try (ResultSet rs = pst.executeQuery()){
+                    if (rs.next()){
+                        int propId = rs.getInt("id");
+                        return propId;
+                    }else {
+                        LOGGER.log(Level.SEVERE, "No property found for owner: " + parentId + " and name: " + propName);
+                        return 0;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error finding property for owner: " + parentId + " and name: " + propName, ex);
+            return -1;
         }
     }
 }
