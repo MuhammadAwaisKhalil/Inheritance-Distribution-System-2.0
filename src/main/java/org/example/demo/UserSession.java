@@ -3,6 +3,7 @@ package org.example.demo;
 public class UserSession {
     private static String currentUsername;
     private static String currentUserEmail;
+    private static int currentUserId;
 
     public static void setCurrentUsername(String username){
 
@@ -18,5 +19,10 @@ public class UserSession {
         return currentUserEmail;
     }
 
-
+    public static int getCurrentUserId() {
+        return currentUserId;
+    }
+    public static void setCurrentUserId(int id){
+        currentUserId=id;
+    }
 }
