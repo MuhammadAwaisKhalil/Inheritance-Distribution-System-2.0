@@ -116,5 +116,17 @@ public class AssetsController {
             System.out.println("LHELHD?HD WALEED");
         }
     }
+    @FXML
+    private void goToDashboard()throws IOException{
+        Stage s = (Stage)shareField.getScene().getWindow();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Dashboard");
+        stage.setScene(new Scene(root));
+        s.close();
+        stage.show();
+    }
 
 }
