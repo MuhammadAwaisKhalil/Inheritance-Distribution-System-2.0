@@ -2,6 +2,7 @@ package org.example.demo.Login;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -57,7 +58,10 @@ public class HelloController {
     }
     @FXML
     private void userLogin() throws IOException {
-        Stage stage = (Stage)usernameField1.getScene().getWindow();
+
+        Stage s = (Stage)usernameField1.getScene().getWindow();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
 
         try {
             this.username = usernameField1.getText();
@@ -71,6 +75,13 @@ public class HelloController {
                         UserSession.setCurrentUserId(userID);
                         System.out.println("Username: "+username);
                         System.out.println("Password:"+password);
+                        Parent root = loader.load();
+                        Stage stage = new Stage();
+                        stage.setTitle("Dashboard");
+                        stage.setScene(new Scene(root));
+                        s.close();
+                        stage.show();
+
                     }
                     else{
                         Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -23,7 +23,7 @@
       <Button layoutX="60.0" layoutY="324.0" mnemonicParsing="false" onAction="#addUser" text="+" />
       <ComboBox fx:id="userComboBox" layoutX="87.0" layoutY="324.0" prefHeight="26.0" prefWidth="344.0" promptText="Select Inheritor" />
       <ListView fx:id="userList" layoutX="60.0" layoutY="357.0" prefHeight="200.0" prefWidth="371.0" />
-      <Button layoutX="496.0" layoutY="336.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-border-radius: 10px;" text="Login" />
+      <Button layoutX="496.0" layoutY="336.0" mnemonicParsing="false" onAction="#goToDashboard" prefHeight="26.0" prefWidth="130.0" style="-fx-border-radius: 10px;" text="Login" />
       <Button layoutX="494.0" layoutY="469.0" mnemonicParsing="false" onAction="#assignInheritor" prefHeight="26.0" prefWidth="130.0" style="-fx-border-radius: 10;" text="Assign Inheritor" />
       <TextField fx:id="shareField" layoutX="487.0" layoutY="408.0" promptText="e.g 75" />
       <Label layoutX="493.0" layoutY="377.0" text="Enter share in property">
