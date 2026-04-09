@@ -29,6 +29,11 @@ public class PropertyPopupController {
                 newProperty = new Property(propertyName, value);
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Asset Added");
+                alert.setHeaderText("");
+                alert.setContentText("Asset Added!");
+                alert.showAndWait();
                 stage.close();
             }
             else{
