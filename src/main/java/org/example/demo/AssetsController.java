@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.demo.database.InheritorDao;
+import org.example.demo.database.PropertyDao;
 import org.example.demo.database.UserDao;
 
 
@@ -87,18 +88,21 @@ public class AssetsController {
         try {
             if (currentProperty != null && currentInheritor != null && !share.trim().isEmpty()) {
                 double sharePercentage = Double.parseDouble(share);
-
-
                 // Extract Ids using method amd give to database
-
-                //if(InheritorDao.assignProperty(, UserDao.getIdByEmail(currentInheritor.getEmail()),sharePercentage))
-
-                System.out.println("LINKED MEE PAA ZOO ZOO ZOO A ZOO ZOO");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Assigned");
-                alert.setHeaderText("Inheritor"+ currentInheritor.getUsername()+" has been assigned\n" +
-                        sharePercentage+"% value of Asset \""+currentProperty.getProperty_name()+"\"");
-                alert.showAndWait();
+                if(InheritorDao.assignProperty(PropertyDao.getPropertyId(currentProperty.getProperty_name(),UserSession.getCurrentUserId()), UserDao.getIdByEmail(currentInheritor.getEmail()),sharePercentage)){
+                    System.out.println("LINKED MEE PAA ZOO ZOO ZOO A ZOO ZOO");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Assigned");
+                    alert.setHeaderText("Inheritor"+ currentInheritor.getUsername()+" has been assigned\n" +
+                            sharePercentage+"% value of Asset \""+currentProperty.getProperty_name()+"\"");
+                    alert.showAndWait();
+                }
+                else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setContentText("Could not load data. Please enter all credentials!");
+                    alert.showAndWait();
+                }
 
             }
             else{
