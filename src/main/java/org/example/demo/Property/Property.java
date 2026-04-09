@@ -1,4 +1,4 @@
-package org.example.demo;
+package org.example.demo.Property;
 
 public class Property {
     private String property_name;

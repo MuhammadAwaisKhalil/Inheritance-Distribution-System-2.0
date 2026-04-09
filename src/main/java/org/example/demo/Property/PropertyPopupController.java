@@ -1,4 +1,4 @@
-package org.example.demo;
+package org.example.demo.Property;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.example.demo.User.UserSession;
 import org.example.demo.database.PropertyDao;
 
 public class PropertyPopupController {
@@ -25,7 +26,7 @@ public class PropertyPopupController {
 
                // PropertyDao.addProperty();
                 Integer value = Integer.parseInt(valuation);
-                PropertyDao.addProperty(propertyName,value,UserSession.getCurrentUserId());
+                PropertyDao.addProperty(propertyName,value, UserSession.getCurrentUserId());
                 newProperty = new Property(propertyName, value);
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
