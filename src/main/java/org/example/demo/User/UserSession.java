@@ -1,4 +1,4 @@
-package org.example.demo;
+package org.example.demo.User;
 
 public class UserSession {
     private static String currentUsername;
