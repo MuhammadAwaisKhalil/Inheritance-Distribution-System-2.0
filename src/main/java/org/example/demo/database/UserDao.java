@@ -97,6 +97,62 @@ public class UserDao {
         }
     }
 
+    public static boolean updateUserEmail(String newEmail, String oldEmail){
+        String query = "UPDATE accounts SET email = ? where email = ?";
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                pst.setString(1, newEmail);
+                pst.setString(2, oldEmail);
+
+                pst.executeUpdate();
+                System.out.println("User email updated successfully");
+                return true;
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error updating user email: "+ oldEmail,e);
+            return false;
+        }
+    }
+
+    public static boolean updateUserName(String newuserName, String oldUserName){
+        String query = "UPDATE accounts SET user_name = ? where user_name = ?";
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                pst.setString(1, newuserName);
+                pst.setString(2, oldUserName);
+
+                pst.executeUpdate();
+                System.out.println("User name updated successfully");
+                return true;
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error updating user name: "+ oldUserName,e);
+            return false;
+        }
+    }
+
+    public static boolean updateUserDob(int id, LocalDate newDob){
+        String query = "UPDATE accounts SET date_of_birth = ? where id = ?";
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                pst.setObject(1, newDob);
+                pst.setInt(2, id);
+
+                pst.executeUpdate();
+                System.out.println("User dob updated successfully");
+                return true;
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error updating user dob: "+ id + " " + newDob,e);
+            return false;
+        }
+    }
+
+
+
 
 
 

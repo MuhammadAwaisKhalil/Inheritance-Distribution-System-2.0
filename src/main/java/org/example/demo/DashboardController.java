@@ -2,6 +2,7 @@ package org.example.demo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
@@ -36,6 +37,23 @@ public class DashboardController {
         stage.setTitle("Add Inheritor");
         stage.setScene(new Scene(root));
         stage.showAndWait();
+    }
+
+    @FXML
+    private void gotoProfile()throws IOException{
+        Stage stage = new Stage();
+       FXMLLoader loader = new FXMLLoader(
+               getClass().getResource("UserProfile.fxml")
+       );
+
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Profile");
+        stage.setScene(scene);
+        stage.showAndWait();
+
     }
 
 

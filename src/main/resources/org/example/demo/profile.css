@@ -1,0 +1,14 @@
+
+
+.primary-btn{
+    -fx-background-color: #534AB7;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.primary-btn:hover{
+    -fx-background-color: #7f77DD;
+}
