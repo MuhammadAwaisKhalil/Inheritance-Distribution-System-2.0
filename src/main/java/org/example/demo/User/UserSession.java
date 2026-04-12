@@ -1,9 +1,12 @@
-package org.example.demo;
+package org.example.demo.User;
+
+import java.time.LocalDate;
 
 public class UserSession {
     private static String currentUsername;
     private static String currentUserEmail;
     private static int currentUserId;
+    private static LocalDate currentDateOfBirth;
 
     public static void setCurrentUsername(String username){
 
@@ -24,5 +27,13 @@ public class UserSession {
     }
     public static void setCurrentUserId(int id){
         currentUserId=id;
+    }
+
+    public static void setCurrentDateOfBirth(LocalDate currentDateOfBirth) {
+        UserSession.currentDateOfBirth = currentDateOfBirth;
+    }
+
+    public static LocalDate getCurrentDateOfBirth() {
+        return currentDateOfBirth;
     }
 }

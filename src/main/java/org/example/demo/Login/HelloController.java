@@ -1,11 +1,14 @@
-package org.example.demo;
+package org.example.demo.Login;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.example.demo.Property.Property;
+import org.example.demo.User.UserSession;
 import org.example.demo.database.UserDao;
 
 import java.io.IOException;
@@ -55,7 +58,10 @@ public class HelloController {
     }
     @FXML
     private void userLogin() throws IOException {
-        Stage stage = (Stage)usernameField1.getScene().getWindow();
+
+        Stage s = (Stage)usernameField1.getScene().getWindow();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
 
         try {
             this.username = usernameField1.getText();
@@ -69,6 +75,13 @@ public class HelloController {
                         UserSession.setCurrentUserId(userID);
                         System.out.println("Username: "+username);
                         System.out.println("Password:"+password);
+                        Parent root = loader.load();
+                        Stage stage = new Stage();
+                        stage.setTitle("Dashboard");
+                        stage.setScene(new Scene(root));
+                        s.close();
+                        stage.show();
+
                     }
                     else{
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -89,7 +102,7 @@ public class HelloController {
     }
     @FXML
     private void switchToRegister() throws IOException {
-        FXMLLoader loader = new FXMLLoader(HelloController.class.getResource("loginPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(HelloController.class.getResource("/org/example/demo/loginPage.fxml"));
         Scene newLoginScene = new Scene(loader.load(),350,451);
         Stage stage = (Stage)usernameField1.getScene().getWindow();
         System.out.println("Scene switched");
