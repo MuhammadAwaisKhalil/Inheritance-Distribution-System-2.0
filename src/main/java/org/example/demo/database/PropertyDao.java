@@ -72,4 +72,27 @@ public class PropertyDao {
             return -1;
         }
     }
+
+    public static int getTotalworth(int parentId){
+        String query = "select Sum(value) as total from properties where parent_owner = ?";
+        try {
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                pst.setInt(1, parentId);
+                try(ResultSet rs = pst.executeQuery()){
+                    if(rs.next()){
+                        int totalWorth = rs.getInt("total");
+                        return totalWorth;
+                    }else {
+                        return 0;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error finding property for owner: " + parentId, e);
+            return -1;
+        }
+    }
+
+
 }
