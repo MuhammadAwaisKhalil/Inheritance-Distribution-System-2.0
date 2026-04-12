@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.example.demo.Property.Property;
+import org.example.demo.User.UserSession;
 import org.example.demo.database.InheritorDao;
 import org.example.demo.database.PropertyDao;
 import org.example.demo.database.UserDao;

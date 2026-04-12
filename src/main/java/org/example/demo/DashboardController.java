@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -12,6 +14,17 @@ import java.io.IOException;
 
 public class DashboardController {
 
+    @FXML private VBox inheritorSnapshotContainer;
+
+    @FXML
+    public void initialize() throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("inheritors-snapshot.fxml")
+        );
+        Parent snapshotView = loader.load();
+        VBox.setVgrow(snapshotView, Priority.ALWAYS);
+        inheritorSnapshotContainer.getChildren().add(snapshotView);
+    }
 
 
     @FXML
@@ -51,6 +64,23 @@ public class DashboardController {
         Scene scene = new Scene(root);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Profile");
+        stage.setScene(scene);
+        stage.showAndWait();
+
+    }
+
+    @FXML
+    private void gotoInheritor()throws IOException{
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("inheritors-detail.fxml")
+        );
+
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Inheritors");
         stage.setScene(scene);
         stage.showAndWait();
 

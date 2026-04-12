@@ -37,7 +37,7 @@
         <VBox prefHeight="540.0" prefWidth="180.0" spacing="10.0" style="-fx-background-color: #2C3E50;" BorderPane.alignment="CENTER">
             <children>
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #34495E;" text="Analytics(In detail)" textFill="WHITE" />
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Properties(In detail)" textFill="WHITE" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gotoInheritor" style="-fx-background-color: transparent;" text="Inheritors" textFill="WHITE" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gotoProfile" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE" />
             </children>
             <padding>
@@ -69,17 +69,8 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                     </padding>
                 </VBox>
-                <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10; -fx-border-color: #CCCCCC; -fx-border-radius: 10;" GridPane.rowIndex="1">
-                    <children>
-                        <Label text="Family tree or something">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                        </Label>
-                    </children>
-                    <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                    </padding>
+                <VBox fx:id="inheritorSnapshotContainer" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10; -fx-border-color: #CCCCCC; -fx-border-radius: 10;" GridPane.rowIndex="1">
+
                 </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                <children>
