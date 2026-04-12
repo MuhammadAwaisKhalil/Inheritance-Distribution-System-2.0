@@ -1,7 +1,10 @@
 package org.example.demo.database;
 
+import org.example.demo.User.User;
+
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -149,6 +152,10 @@ public class UserDao {
             LOGGER.log(Level.SEVERE, "Error updating user dob: "+ id + " " + newDob,e);
             return false;
         }
+    }
+
+    public static List<User> getAllUsers(){
+
     }
 
 
