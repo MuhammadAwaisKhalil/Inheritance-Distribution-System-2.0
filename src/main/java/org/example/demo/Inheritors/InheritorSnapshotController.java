@@ -114,7 +114,7 @@ public class InheritorSnapshotController {
     private void openDetailedView(){
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("org/example/demo/inheritors-detail.fxml"));
+                    getClass().getResource("/org/example/demo/inheritors-detail.fxml"));
             Stage stage = new Stage();
             stage.initModality(Modality.NONE);
             stage.setTitle("Inheritors-Detailed View");

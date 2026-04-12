@@ -123,7 +123,7 @@ public class AssetsController {
     private void goToDashboard()throws IOException{
         Stage s = (Stage)shareField.getScene().getWindow();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo/Dashboard.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setTitle("Dashboard");

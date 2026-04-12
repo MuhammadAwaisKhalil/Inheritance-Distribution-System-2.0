@@ -61,7 +61,7 @@ public class HelloController {
 
         Stage s = (Stage)usernameField1.getScene().getWindow();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo/Dashboard.fxml"));
 
         try {
             this.username = usernameField1.getText();
@@ -93,7 +93,9 @@ public class HelloController {
                     }
                 }
             } catch (Exception e) {
-                System.out.println("Login me errror hai waleeeed");
+                System.out.println("Login me errror hai waleeeed"+e.getMessage());
+                System.out.println("THE REAL CAUSE IS: " + e.getCause());
+                e.printStackTrace();
             }
         } catch (Exception e) {
             System.out.println("Sometinh wong");
@@ -113,7 +115,7 @@ public class HelloController {
 
     @FXML
     private void addAssetandInheritorData() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("property_and_inheritor.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo/property_and_inheritor.fxml"));
 
         try{
             this.username=usernameField2.getText();

@@ -15,4 +15,5 @@ module org.example.demo {
     opens org.example.demo.Property to javafx.fxml;
     exports org.example.demo.Login;
     opens org.example.demo.Login to javafx.fxml;
+    opens org.example.demo.Inheritors to javafx.fxml;
 }

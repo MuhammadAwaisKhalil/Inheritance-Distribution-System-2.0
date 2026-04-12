@@ -19,7 +19,7 @@ public class DashboardController {
     @FXML
     public void initialize() throws IOException {
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("inheritors-snapshot.fxml")
+                getClass().getResource("/org/example/demo/inheritorsSnapshot.fxml")
         );
         Parent snapshotView = loader.load();
         VBox.setVgrow(snapshotView, Priority.ALWAYS);
@@ -30,7 +30,7 @@ public class DashboardController {
     @FXML
     private void addAsset()throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("propertyPopup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo/propertyPopup.fxml"));
         Parent root = loader.load();
 
         Scene scene = new Scene(root);
@@ -42,7 +42,7 @@ public class DashboardController {
     }
     @FXML
     private void addInheritor()throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AssignInheritor.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo/AssignInheritor.fxml"));
         Parent root = loader.load();
 
         Stage stage = new Stage();
@@ -56,7 +56,7 @@ public class DashboardController {
     private void gotoProfile()throws IOException{
         Stage stage = new Stage();
        FXMLLoader loader = new FXMLLoader(
-               getClass().getResource("UserProfile.fxml")
+               getClass().getResource("/org/example/demo/UserProfile.fxml")
        );
 
         Parent root = loader.load();
@@ -73,7 +73,7 @@ public class DashboardController {
     private void gotoInheritor()throws IOException{
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("inheritors-detail.fxml")
+                getClass().getResource("/org/example/demo/inheritors-detail.fxml")
         );
 
         Parent root = loader.load();
