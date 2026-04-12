@@ -1,9 +1,14 @@
 package org.example.demo.database;
 
+import org.example.demo.Property.Property;
+
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -92,6 +97,34 @@ public class PropertyDao {
             LOGGER.log(Level.SEVERE, "Error finding property for owner: " + parentId, e);
             return -1;
         }
+    }
+
+
+    public static List<Property> allProperties(int parentId){
+        List<Property> properties = new ArrayList<>();
+        String query = "select id, property_name, value from properties where parent_owner = ?";
+        try {
+            Connection con = DbConnection.getConnection();
+            try (PreparedStatement pst = con.prepareStatement(query)){
+                pst.setInt(1, parentId);
+                try(ResultSet rs = pst.executeQuery()) {
+                    while (rs.next()) {
+                        int id = rs.getInt("id");
+                        String property_name = rs.getString("property_name");
+                        double value = rs.getDouble("value");
+
+                        Property property = new Property(id, property_name, value);
+                        properties.add(property);
+                    }
+                }
+                System.out.println("All properties found for user " + parentId);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error finding properties for user " + parentId ,e);
+            throw new RuntimeException(e);
+        }
+
+        return properties;
     }
 
 
