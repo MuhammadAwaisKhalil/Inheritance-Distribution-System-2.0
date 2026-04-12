@@ -19,6 +19,14 @@ public class User {
 
     }
 
+    User(String username,String email, String password, LocalDate date_of_birth, Integer userID){
+        this.username=username;
+        this.email=email;
+        this.password=password;
+        this.date_of_birth=date_of_birth;
+        this.userID=userID;
+    }
+
 
 
     public String getEmail() {
@@ -35,6 +43,10 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public Integer getUserID() {
+        return userID;
     }
 
     public void setUserID(Integer userID) {
