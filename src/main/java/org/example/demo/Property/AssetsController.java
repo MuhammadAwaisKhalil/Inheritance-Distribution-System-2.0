@@ -128,6 +128,7 @@ public class AssetsController {
         Stage stage = new Stage();
         stage.setTitle("Dashboard");
         stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
         s.close();
         stage.show();
     }

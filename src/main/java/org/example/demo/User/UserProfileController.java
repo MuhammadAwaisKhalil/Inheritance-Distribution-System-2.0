@@ -2,6 +2,10 @@ package org.example.demo.User;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -9,7 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import org.example.demo.database.UserDao;
+
+import java.io.IOException;
 
 public class UserProfileController {
 
@@ -27,7 +34,7 @@ public class UserProfileController {
 
     @FXML
     public void initialize(){
-        Image img = new Image(getClass().getResourceAsStream("org/example/demo/images/blank-profile-400x400-ffffff-circle-user1-80-402956.png"));
+        Image img = new Image(getClass().getResourceAsStream("/org/example/demo/images/blank-profile-400x400-ffffff-circle-user1-80-402956.png"));
         imageCircle.setFill(new ImagePattern(img));
         populateFields();
     }
@@ -88,6 +95,31 @@ public class UserProfileController {
     private void showAlert(String msg){
         Alert a = new Alert(Alert.AlertType.INFORMATION, msg);
         a.showAndWait();
+    }
+    @FXML
+    private void goToAnalytics(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo/Dashboard.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Dashboard");
+        stage.show();
+    }
+    @FXML
+    private void gotoInheritor(ActionEvent e)throws IOException{
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/org/example/demo/inheritors-detail.fxml")
+        );
+
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        //stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Inheritors");
+        stage.setScene(scene);
+        stage.show();
+
     }
 
 }
