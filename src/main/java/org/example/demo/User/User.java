@@ -1,4 +1,4 @@
-package org.example.demo;
+package org.example.demo.User;
 
 import java.time.LocalDate;
 

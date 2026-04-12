@@ -1,4 +1,4 @@
-package org.example.demo;
+package org.example.demo.Login;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.example.demo.Property.Property;
+import org.example.demo.User.UserSession;
 import org.example.demo.database.UserDao;
 
 import java.io.IOException;
@@ -100,7 +102,7 @@ public class HelloController {
     }
     @FXML
     private void switchToRegister() throws IOException {
-        FXMLLoader loader = new FXMLLoader(HelloController.class.getResource("loginPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(HelloController.class.getResource("/org/example/demo/loginPage.fxml"));
         Scene newLoginScene = new Scene(loader.load(),350,451);
         Stage stage = (Stage)usernameField1.getScene().getWindow();
         System.out.println("Scene switched");

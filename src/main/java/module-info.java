@@ -9,4 +9,10 @@ module org.example.demo {
 
     opens org.example.demo to javafx.fxml;
     exports org.example.demo;
+    exports org.example.demo.User;
+    opens org.example.demo.User to javafx.fxml;
+    exports org.example.demo.Property;
+    opens org.example.demo.Property to javafx.fxml;
+    exports org.example.demo.Login;
+    opens org.example.demo.Login to javafx.fxml;
 }

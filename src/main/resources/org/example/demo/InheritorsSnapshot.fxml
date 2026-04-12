@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="282.0" prefWidth="400.0" spacing="0" stylesheets="@inheritors-snapshot.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.Inheritors.InheritorSnapshotController">
+
+    <!-- Header: Total Worth Banner -->
+    <VBox alignment="CENTER" prefHeight="77.0" prefWidth="185.0" style="-fx-background-color: #2C3E50" styleClass="worth-banner">
+        <Label style="-fx-text-fill: #BDC3C7; -fx-font-size: 13px;" styleClass="worth-label" text="Total Estate Worth" />
+        <Label fx:id="totalWorthLabel" style="-fx-text-fill: #F0C040; -fx-font-size: 28px; -fx-font-weight: bold" styleClass="worth-amount" text="PKR 0" />
+        <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
+    </VBox>
+
+    <!-- Section header row -->
+    <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: #F8F6F0; -fx-border-color: #E0D8C8; -fx-border-width: 0 0 1 0" styleClass="section-header">
+        <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2C3E50" styleClass="section-title" text="Inheritors" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="viewAllBtn" onAction="#openDetailedView" style="-fx-background-color: #F0C040; -fx-text-fill: #2C3E50; -fx-font-weight:semi_bold; -fx-cursor: hand; -fx-background-radius: 4px" styleClass="view-all-btn" text="View All →" />
+        <padding><Insets bottom="12" left="20" right="20" top="12" /></padding>
+    </HBox>
+
+    <!-- Accordion list of inheritors -->
+    <ScrollPane fitToWidth="true" styleClass="scroll-pane" VBox.vgrow="ALWAYS">
+        <Accordion fx:id="inheritorsAccordion" styleClass="inheritors-accordion" />
+    </ScrollPane>
+
+</VBox>

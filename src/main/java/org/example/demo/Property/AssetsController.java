@@ -1,4 +1,4 @@
-package org.example.demo;
+package org.example.demo.Property;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +11,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.demo.User.User;
+import org.example.demo.User.UserPopupController;
+import org.example.demo.User.UserSession;
 import org.example.demo.database.InheritorDao;
 import org.example.demo.database.PropertyDao;
 import org.example.demo.database.UserDao;
@@ -35,7 +38,7 @@ public class AssetsController {
 
     @FXML
     private void addProperty(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("propertyPopup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo/propertyPopup.fxml"));
         Parent root = loader.load();
         PropertyPopupController controller = loader.getController();
 
@@ -59,7 +62,7 @@ public class AssetsController {
     }
     @FXML
     private void addUser(ActionEvent event)throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("userPopup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo/userPopup.fxml"));
         Parent root = loader.load();
 
         UserPopupController controller = loader.getController();
@@ -89,7 +92,7 @@ public class AssetsController {
             if (currentProperty != null && currentInheritor != null && !share.trim().isEmpty()) {
                 double sharePercentage = Double.parseDouble(share);
                 // Extract Ids using method amd give to database
-                if(InheritorDao.assignProperty(PropertyDao.getPropertyId(currentProperty.getProperty_name(),UserSession.getCurrentUserId()), UserDao.getIdByEmail(currentInheritor.getEmail()),sharePercentage)){
+                if(InheritorDao.assignProperty(PropertyDao.getPropertyId(currentProperty.getProperty_name(), UserSession.getCurrentUserId()), UserDao.getIdByEmail(currentInheritor.getEmail()),sharePercentage)){
                     System.out.println("LINKED MEE PAA ZOO ZOO ZOO A ZOO ZOO");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Assigned");

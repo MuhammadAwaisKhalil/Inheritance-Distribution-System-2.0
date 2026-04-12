@@ -1,0 +1,25 @@
+/* Accordion */
+.inheritors-accordion { -fx-background-color: transparent; }
+.inheritor-pane > .title {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #EAE4D8;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 10 16 10 16;
+}
+.inheritor-pane > .title:hover { -fx-background-color: #FDF8EE; }
+.inheritor-name   { -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2C3E50; }
+.inheritor-relation { -fx-font-size: 12px; -fx-text-fill: #95A5A6;
+    -fx-background-color: #ECF0F1; -fx-padding: 2 6 2 6;
+    -fx-background-radius: 3px; }
+.inheritor-share  { -fx-font-size: 13px; -fx-text-fill: #C0962A; -fx-font-weight: bold; }
+
+/* Property rows */
+.property-list    { -fx-background-color: #FAFAF8; }
+.property-row     { -fx-padding: 6 0 6 0; -fx-border-color: #F0EBE0; -fx-border-width: 0 0 1 0; }
+.prop-name        { -fx-font-size: 13px; -fx-text-fill: #34495E; }
+.prop-portion     { -fx-font-size: 12px; -fx-text-fill: #7F8C8D; }
+.prop-value       { -fx-font-size: 13px; -fx-text-fill: #2C3E50; -fx-font-weight: bold; }
+
+/* Scroll pane */
+.scroll-pane { -fx-background-color: transparent; -fx-border-color: transparent; }
+.scroll-pane > .viewport { -fx-background-color: transparent; }

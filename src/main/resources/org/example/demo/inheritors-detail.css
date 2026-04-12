@@ -1,0 +1,50 @@
+/* Toolbar */
+.toolbar {
+    -fx-background-color: #2C3E50;
+    -fx-border-color: #243342;
+    -fx-border-width: 0 0 1 0;
+}
+.toolbar-title { -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #F0C040; }
+.search-field  {
+    -fx-background-color: #3D5166;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #95A5A6;
+    -fx-background-radius: 4px;
+    -fx-border-color: #4A6278;
+    -fx-border-radius: 4px;
+}
+.sort-combo    { -fx-background-color: #3D5166; -fx-text-fill: white; -fx-background-radius: 4px; }
+.add-btn {
+    -fx-background-color: #F0C040; -fx-text-fill: #2C3E50;
+    -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 4px;
+}
+
+/* Worth bar */
+.worth-bar        { -fx-background-color: #F8F6F0; -fx-border-color: #E0D8C8; -fx-border-width: 0 0 1 0; }
+.worth-bar-label  { -fx-font-size: 13px; -fx-text-fill: #7F8C8D; }
+.worth-bar-amount { -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2C3E50; }
+.count-label      { -fx-font-size: 12px; -fx-text-fill: #95A5A6; }
+
+/* Reuse same accordion/property styles from snapshot */
+.inheritors-accordion { -fx-background-color: transparent; }
+.inheritor-pane > .title {
+    -fx-background-color: #FFFFFF; -fx-border-color: #EAE4D8; -fx-border-width: 0 0 1 0; -fx-padding: 12 16 12 16;
+}
+.inheritor-pane > .title:hover { -fx-background-color: #FDF8EE; }
+.inheritor-name    { -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2C3E50; }
+.inheritor-relation{ -fx-font-size: 12px; -fx-text-fill: #95A5A6;
+    -fx-background-color: #ECF0F1; -fx-padding: 2 6 2 6; -fx-background-radius: 3px; }
+.inheritor-share   { -fx-font-size: 13px; -fx-text-fill: #C0962A; -fx-font-weight: bold; }
+.property-list     { -fx-background-color: #FAFAF8; }
+.property-row      { -fx-padding: 7 0 7 0; -fx-border-color: #F0EBE0; -fx-border-width: 0 0 1 0; }
+.prop-name         { -fx-font-size: 13px; -fx-text-fill: #34495E; }
+.prop-portion      { -fx-font-size: 12px; -fx-text-fill: #7F8C8D; }
+.prop-value        { -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #2C3E50; }
+.row-btn-edit   { -fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 11px;
+    -fx-background-radius: 3px; -fx-cursor: hand; -fx-padding: 3 8 3 8; }
+.row-btn-remove { -fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 11px;
+    -fx-background-radius: 3px; -fx-cursor: hand; -fx-padding: 3 8 3 8; }
+.assign-btn     { -fx-background-color: transparent; -fx-text-fill: #3498DB;
+    -fx-border-color: #3498DB; -fx-border-radius: 4px;
+    -fx-cursor: hand; -fx-padding: 4 12 4 12; -fx-font-size: 12px; }
+.scroll-pane > .viewport { -fx-background-color: transparent; }
