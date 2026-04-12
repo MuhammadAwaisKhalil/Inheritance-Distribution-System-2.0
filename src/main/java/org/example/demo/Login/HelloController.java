@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.example.demo.Property.Property;
+import org.example.demo.User.User;
 import org.example.demo.User.UserSession;
 import org.example.demo.database.UserDao;
 
@@ -70,7 +71,20 @@ public class HelloController {
                 if(username!=null && password!=null){
 
                     int userID = UserDao.getIdByEmail(this.username);
+
                     if(userID>0){
+                        User u = UserDao.getCurrentUserInfo(userID);
+                        if(u!=null){
+                            UserSession.setCurrentUsername(u.getUsername());
+                            UserSession.setCurrentUserEmail(u.getEmail());
+                            if(u.getDate_of_birth()!=null) {
+                                UserSession.setCurrentDateOfBirth(u.getDate_of_birth());
+                            }
+                            else{
+                                UserSession.setCurrentDateOfBirth(LocalDate.now());
+                            }
+                            System.out.println("User Session Initialized");
+                        }
                         System.out.println("Logged IN");
                         UserSession.setCurrentUserId(userID);
                         System.out.println("Username: "+username);
@@ -134,6 +148,9 @@ public class HelloController {
                     assetStage.show();
                     int id=UserDao.getIdByEmail(email);
                     UserSession.setCurrentUserId(id);
+                    UserSession.setCurrentUsername(username);
+                    UserSession.setCurrentUserEmail(email);
+                    UserSession.setCurrentDateOfBirth(dateOfBirth);
 
                 }
                 else{

@@ -152,10 +152,27 @@ public class UserDao {
             LOGGER.log(Level.SEVERE, "Error updating user dob: "+ id + " " + newDob,e);
             return false;
         }
-    }
+    } //user_name, password, date_of_birth, email,parent
+    public static User getCurrentUserInfo(int id){
+        String query = "SELECT user_name, date_of_birth, email, password FROM accounts WHERE id = ?";
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                pst.setInt(1,id);
+                try(ResultSet rs = pst.executeQuery()){
+                    String userName = rs.getString("user_name");
+                    LocalDate dob =  rs.getDate("date_of_birth").toLocalDate();
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
 
-    public static List<User> getAllUsers(){
+                    return new User(userName,email,password,dob);
 
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error getting user info: "+ id + " " + e);
+        }
+        return null;
     }
 
 

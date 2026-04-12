@@ -1,5 +1,6 @@
 package org.example.demo;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -37,7 +38,7 @@ public class DashboardController {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Add Asset");
         stage.setScene(scene);
-        stage.showAndWait();
+        stage.show();
 
     }
     @FXML
@@ -49,12 +50,12 @@ public class DashboardController {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Add Inheritor");
         stage.setScene(new Scene(root));
-        stage.showAndWait();
+        stage.show();
     }
 
     @FXML
-    private void gotoProfile()throws IOException{
-        Stage stage = new Stage();
+    private void gotoProfile(ActionEvent e)throws IOException{
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
        FXMLLoader loader = new FXMLLoader(
                getClass().getResource("/org/example/demo/UserProfile.fxml")
        );
@@ -62,16 +63,16 @@ public class DashboardController {
         Parent root = loader.load();
 
         Scene scene = new Scene(root);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Profile");
         stage.setScene(scene);
-        stage.showAndWait();
+        stage.show();
 
     }
 
     @FXML
-    private void gotoInheritor()throws IOException{
-        Stage stage = new Stage();
+    private void gotoInheritor(ActionEvent e)throws IOException{
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/org/example/demo/inheritors-detail.fxml")
         );
@@ -79,11 +80,20 @@ public class DashboardController {
         Parent root = loader.load();
 
         Scene scene = new Scene(root);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Inheritors");
         stage.setScene(scene);
-        stage.showAndWait();
+        stage.show();
 
+    }
+    @FXML
+    private void goToAnalytics(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo/Dashboard.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Dashboard");
+        stage.show();
     }
 
 

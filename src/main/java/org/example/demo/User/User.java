@@ -11,7 +11,7 @@ public class User {
     private Integer userID;
 
 
-    User(String username,String email, String password, LocalDate date_of_birth){
+    public User(String username, String email, String password, LocalDate date_of_birth){
         this.username=username;
         this.email=email;
         this.password=password;
