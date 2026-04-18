@@ -1,5 +1,7 @@
 package org.example.demo.User;
 
+import org.example.demo.database.UserDao;
+
 import java.time.LocalDate;
 
 public class UserSession {
@@ -7,6 +9,7 @@ public class UserSession {
     private static String currentUserEmail;
     private static int currentUserId;
     private static LocalDate currentDateOfBirth;
+
 
     public static void setCurrentUsername(String username){
 
@@ -36,4 +39,9 @@ public class UserSession {
     public static LocalDate getCurrentDateOfBirth() {
         return currentDateOfBirth;
     }
+
+
+
+
+
 }

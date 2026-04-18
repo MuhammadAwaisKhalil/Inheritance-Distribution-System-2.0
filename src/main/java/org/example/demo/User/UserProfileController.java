@@ -43,7 +43,11 @@ public class UserProfileController {
         userNameLabel.setText("@" + UserSession.getCurrentUsername());
         accountName.setText(UserSession.getCurrentUsername());
         emailLabel.setText(UserSession.getCurrentUserEmail());
-        DateLabel.setText(UserSession.getCurrentDateOfBirth().toString());
+        if(UserSession.getCurrentDateOfBirth()!=null)
+            DateLabel.setText(UserSession.getCurrentDateOfBirth().toString());
+        else{
+            DateLabel.setText("Date of birth not Assigned Yet!");
+        }
     }
 
     @FXML
