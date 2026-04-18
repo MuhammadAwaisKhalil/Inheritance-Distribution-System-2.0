@@ -131,6 +131,9 @@ public class AssetsController {
         stage.initModality(Modality.APPLICATION_MODAL);
         s.close();
         stage.show();
+
+        UserDao.setCurrentLoginTime(UserSession.getCurrentUserId());
+
     }
 
 }

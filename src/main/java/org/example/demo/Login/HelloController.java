@@ -21,6 +21,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -106,6 +108,11 @@ public class HelloController {
                         stage.setScene(new Scene(root));
                         s.close();
                         stage.show();
+                        UserDao.setCurrentLoginTime(UserSession.getCurrentUserId());
+
+                        calculateDayDifference();
+
+
 
                     }
                     else{
@@ -162,6 +169,8 @@ public class HelloController {
                     UserSession.setCurrentUsername(username);
                     UserSession.setCurrentUserEmail(email);
                     UserSession.setCurrentDateOfBirth(dateOfBirth);
+
+
 
                 }
                 else{
@@ -280,5 +289,39 @@ public class HelloController {
         }
 
     }
+    private void calculateDayDifference(){
+        Integer parentID = UserDao.getCurrentParentId(UserSession.getCurrentUserId());
+        if(parentID!=null){
+           LocalDateTime parentLastLogin= UserDao.getPastLoginTime(parentID);
+
+           if(parentLastLogin!=null){
+               LocalDateTime today = LocalDateTime.now();
+
+               // 2. Calculate the difference in days
+               long daysSinceLastLogin = ChronoUnit.DAYS.between(parentLastLogin, today);
+
+               if(daysSinceLastLogin>30){
+                   if(UserDao.updateDeathofParent(parentID)){
+                       Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                       alert.setTitle("Inna Lilla hi waInna ilaihi Rajioon");
+                       alert.setHeaderText("");
+                       alert.setContentText("30 day period over! Distributing inheritance");
+                       alert.showAndWait();
+                   }
+                   else{
+                       return;
+                   }
+               }
+           }
+           else{
+               return;
+           }
+
+        }
+        else{
+            return;
+        }
+    }
+
 
 }

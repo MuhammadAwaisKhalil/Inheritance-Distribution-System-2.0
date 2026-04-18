@@ -5,6 +5,7 @@ import org.example.demo.User.User;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -217,6 +218,97 @@ public class UserDao {
         }
         return null;
     }
+    public static Integer getCurrentParentId(int id){
+        String query = "SELECT parent FROM accounts WHERE id = ?";
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                pst.setInt(id,1);
+                try(ResultSet rs = pst.executeQuery(query)){
+
+                    Integer parentID =(Integer) rs.getObject("parent");
+                    if(parentID==null){
+                        return null;
+                    }
+                    else{
+                        return parentID;
+                    }
+
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error loadinf db in parent ");
+        }
+        return null;
+    }
+    public static void setCurrentLoginTime(int userid){
+        LocalDateTime currentDate = LocalDateTime.now();
+        Timestamp stamp = java.sql.Timestamp.valueOf(currentDate);
+
+
+        String query = "UPDATE accounts SET last_login = ? WHERE id = ? ";
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                pst.setTimestamp(1,stamp);
+                pst.setInt(2,userid);
+                int rowsEffected = pst.executeUpdate();
+
+                if(rowsEffected>0){
+                    System.out.println("Value updated");
+                }
+                else{
+                    System.out.println("Wongness");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static LocalDateTime getPastLoginTime(int userid){
+        String query = "SELECT last_login FROM accounts WHERE id = ?";
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                pst.setInt(1,userid);
+                try(ResultSet rs = pst.executeQuery()){
+                    LocalDateTime last_login =(LocalDateTime) rs.getObject("last_login");
+                    if(last_login==null){
+                        return null;
+                    }
+                    else{
+                        return last_login;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Wongness in the mooness");
+        }
+        return null;
+    }
+    public static boolean updateDeathofParent(int parentID){
+        String query = "UPDATE accounts SET is_deceased = ? WHERE parent = ?";
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                pst.setBoolean(1,true);
+                pst.setInt(2,parentID);
+
+                int r = pst.executeUpdate();
+                if(r>0){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
 
 
 
