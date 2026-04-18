@@ -4,6 +4,7 @@ import org.example.demo.User.User;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
@@ -179,33 +180,78 @@ public class UserDao {
         }
         return null;
     }
-    public static Integer getCurrentParentId(int id){
-        String query = "SELECT parent FROM accounts WHERE id = ?";
+
+    public static List<Integer> allInheritors(int parentId){
+        List<Integer> allInheritors = new ArrayList<>();
+        String query = "Select id from accounts where parent = ?";
+
         try{
             Connection con = DbConnection.getConnection();
             try(PreparedStatement pst = con.prepareStatement(query)){
-                pst.setInt(id,1);
-                try(ResultSet rs = pst.executeQuery(query)){
+                pst.setInt(1,parentId);
+                try(ResultSet rs = pst.executeQuery()) {
+                    while (rs.next()) {
+                        int id = rs.getInt("id");
+                        allInheritors.add(id);
+                    }
 
-                    Integer parentID =(Integer) rs.getObject("parent");
-                    if(parentID==null){
-                        return null;
+                    System.out.println("All inheritors found for user " + parentId);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error getting all inheritors: "+ parentId + " " + e);
+        }
+        return allInheritors;
+    }
+
+    public static String getUserEmailFromId(int id){
+        String query = "Select email from accounts where id = ?";
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                pst.setInt(1,id);
+                try(ResultSet rs = pst.executeQuery()) {
+                    if (rs.next()) {
+                        String email = rs.getString("email");
+                        return email;
                     }
-                    else{
+                }
+            }
+        } catch (SQLException e) {
+                LOGGER.log(Level.SEVERE, "Error getting user email: "+ id + " " + e);
+        }
+        return null;
+    }
+    public static int getCurrentParentId(int id){
+        String query = "SELECT parent FROM accounts WHERE id = ?";
+        System.out.println("In parent before try");
+        try{
+            System.out.println("In parent before connectiion");
+
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                System.out.println("In parent before setint");
+
+                pst.setInt(1,id);
+                System.out.println("In parent before result");
+
+                try(ResultSet rs = pst.executeQuery()){
+                    if(rs.next()) {
+                        int parentID = rs.getInt("parent");
                         return parentID;
-                    }
+                    }   
 
                 }
             }
 
         } catch (SQLException e) {
-            System.out.println("Error loadinf db in parent ");
+            System.out.println("Error loadinf db in parent " + e);
         }
-        return null;
+        return 0;
     }
     public static void setCurrentLoginTime(int userid){
         LocalDateTime currentDate = LocalDateTime.now();
-        Timestamp stamp = java.sql.Timestamp.valueOf(currentDate);
+        Timestamp stamp = Timestamp.valueOf(currentDate);
 
 
         String query = "UPDATE accounts SET last_login = ? WHERE id = ? ";
@@ -227,14 +273,17 @@ public class UserDao {
             throw new RuntimeException(e);
         }
     }
-    public static LocalDateTime getPastLoginTime(int userid){
+    public static LocalDate getPastLoginTime(int userid){
         String query = "SELECT last_login FROM accounts WHERE id = ?";
         try{
             Connection con = DbConnection.getConnection();
             try(PreparedStatement pst = con.prepareStatement(query)){
                 pst.setInt(1,userid);
                 try(ResultSet rs = pst.executeQuery()){
-                    LocalDateTime last_login =(LocalDateTime) rs.getObject("last_login");
+                    LocalDate last_login = null;
+                    if(rs.next()){
+                    last_login = rs.getDate("last_login").toLocalDate();
+                    }
                     if(last_login==null){
                         return null;
                     }

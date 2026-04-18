@@ -3,6 +3,7 @@ package org.example.demo.database;
 import javafx.collections.FXCollections;
 import org.example.demo.Inheritors.Inheritor;
 import org.example.demo.Inheritors.InheritorProperty;
+import org.example.demo.Property.Property;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -152,6 +153,29 @@ public class InheritorDao {
         }
 
         return leftoverproperties;
+    }
+
+    public static List<Integer> getAllInheritedPropertiesId(int inheritor_id){
+        List<Integer> properties = new ArrayList<>();
+        String query = "select property_id from inherits where inheritor_id = ?";
+        try {
+            Connection con = DbConnection.getConnection();
+            try (PreparedStatement pst = con.prepareStatement(query)){
+                pst.setInt(1, inheritor_id);
+                try(ResultSet rs = pst.executeQuery()) {
+                    while (rs.next()) {
+                        int id = rs.getInt("property_id");
+
+                    }
+                }
+                System.out.println("All properties id  found for user " + inheritor_id);
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error finding properties for user " + inheritor_id ,e);
+            throw new RuntimeException(e);
+        }
+
+        return properties;
     }
 
 }
