@@ -7,13 +7,24 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.example.demo.Inheritors.Inheritor;
+import org.example.demo.Inheritors.InheritorProperty;
 import org.example.demo.Property.Property;
 import org.example.demo.User.User;
 import org.example.demo.User.UserSession;
+import org.example.demo.database.InheritorDao;
+import org.example.demo.database.PropertyDao;
 import org.example.demo.database.UserDao;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HelloController {
     //-------------------FXML VARS-------------------
@@ -172,5 +183,102 @@ public class HelloController {
         }
     }
 
+    private void notifyAllUsers(int parentId){
+        List<Inheritor> allInheritors = InheritorDao.getAllInheritors(parentId);
+
+        for (Inheritor inheritor: allInheritors){
+            try{
+                sendEmail(inheritor);
+            }catch (MessagingException e){
+                Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }
+
+    private void sendEmail(Inheritor inheritor) throws MessagingException{
+        String email = UserDao.getUserEmailFromId(inheritor.getId());
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+
+        String myemail = "sawasta556@gmail.com";
+        String mypassword = "zqli ejyg totp txwc";
+
+        Session session = Session.getInstance(props, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(myemail, mypassword);
+            }
+        });
+
+        String message1 = buildEmailContent(inheritor);
+        Message message = prepareMessage(session, myemail, email, message1);
+
+        if (message != null) {
+            Transport.send(message);
+            new Alert(Alert.AlertType.INFORMATION, "Send Email Success").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Please try later").show();
+        }
+    }
+
+    private Message prepareMessage(Session session, String from, String to, String message) {
+        try{
+            Message message1 = new MimeMessage(session);
+            message1.setFrom(new InternetAddress(from));
+            message1.setRecipients(Message.RecipientType.TO, new InternetAddress[]{
+                    new InternetAddress(to)
+            });
+
+            message1.setSubject("Important! Property Distributed");
+            message1.setText(message);
+            return message1;
+        } catch (Exception e) {
+            Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        return null;
+    }
+
+    private String buildEmailContent(Inheritor inheritor) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Dear ").append(inheritor.getName()).append(",\n\n");
+        sb.append("We are pleased to inform you that your inheritor has been added to our system.\n\n");
+        sb.append("Inherited Property: \n");
+        sb.append("----------------------------------------\n");
+
+        double totalValue = inheritor.calculateTotalValue();
+        for(InheritorProperty p: inheritor.getProperties()){
+            sb.append("Property: ").append(p.getPropertyName()).append("\n");
+            sb.append("Valuation: ").append(p.getWorth()).append("\n");;
+            sb.append("Share: ").append(p.getPortionGiven()).append("%\n\n");
+        }
+
+        sb.append("----------------------------------------\n");
+
+        sb.append("Total Value: ").append(totalValue).append("\n");
+        sb.append("Please log in to the app for more details.\n\n");
+        sb.append("Regards,\nYour App Team");
+
+        return sb.toString();
+    }
+
+    private void addPropertyToInheritor(int parentId){
+        List<Inheritor> allInheritors = InheritorDao.getAllInheritors(parentId);
+        for (Inheritor inheritor: allInheritors){
+            for(InheritorProperty p: inheritor.getProperties()){
+                if (PropertyDao.addProperty(p.getPropertyName(), (int)p.getAbsoluteValue(), inheritor.getId())){
+                    System.out.println("Property added to inheritor");
+                }else {
+                    System.out.println("Property not added to inheritor");
+                }
+            }
+        }
+
+    }
 
 }

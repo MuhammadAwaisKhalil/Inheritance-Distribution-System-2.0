@@ -4,6 +4,7 @@ import org.example.demo.User.User;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -171,6 +172,48 @@ public class UserDao {
             }
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Error getting user info: "+ id + " " + e);
+        }
+        return null;
+    }
+
+    public static List<Integer> allInheritors(int parentId){
+        List<Integer> allInheritors = new ArrayList<>();
+        String query = "Select id from accounts where parent = ?";
+
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                pst.setInt(1,parentId);
+                try(ResultSet rs = pst.executeQuery()) {
+                    while (rs.next()) {
+                        int id = rs.getInt("id");
+                        allInheritors.add(id);
+                    }
+
+                    System.out.println("All inheritors found for user " + parentId);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error getting all inheritors: "+ parentId + " " + e);
+        }
+        return allInheritors;
+    }
+
+    public static String getUserEmailFromId(int id){
+        String query = "Select email from accounts where id = ?";
+        try{
+            Connection con = DbConnection.getConnection();
+            try(PreparedStatement pst = con.prepareStatement(query)){
+                pst.setInt(1,id);
+                try(ResultSet rs = pst.executeQuery()) {
+                    if (rs.next()) {
+                        String email = rs.getString("email");
+                        return email;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+                LOGGER.log(Level.SEVERE, "Error getting user email: "+ id + " " + e);
         }
         return null;
     }
