@@ -218,33 +218,36 @@ public class UserDao {
         }
         return null;
     }
-    public static Integer getCurrentParentId(int id){
+    public static int getCurrentParentId(int id){
         String query = "SELECT parent FROM accounts WHERE id = ?";
+        System.out.println("In parent before try");
         try{
+            System.out.println("In parent before connectiion");
+
             Connection con = DbConnection.getConnection();
             try(PreparedStatement pst = con.prepareStatement(query)){
-                pst.setInt(id,1);
-                try(ResultSet rs = pst.executeQuery(query)){
+                System.out.println("In parent before setint");
 
-                    Integer parentID =(Integer) rs.getObject("parent");
-                    if(parentID==null){
-                        return null;
-                    }
-                    else{
+                pst.setInt(1,id);
+                System.out.println("In parent before result");
+
+                try(ResultSet rs = pst.executeQuery()){
+                    if(rs.next()) {
+                        int parentID = rs.getInt("parent");
                         return parentID;
-                    }
+                    }   
 
                 }
             }
 
         } catch (SQLException e) {
-            System.out.println("Error loadinf db in parent ");
+            System.out.println("Error loadinf db in parent " + e);
         }
-        return null;
+        return 0;
     }
     public static void setCurrentLoginTime(int userid){
         LocalDateTime currentDate = LocalDateTime.now();
-        Timestamp stamp = java.sql.Timestamp.valueOf(currentDate);
+        Timestamp stamp = Timestamp.valueOf(currentDate);
 
 
         String query = "UPDATE accounts SET last_login = ? WHERE id = ? ";
@@ -266,14 +269,17 @@ public class UserDao {
             throw new RuntimeException(e);
         }
     }
-    public static LocalDateTime getPastLoginTime(int userid){
+    public static LocalDate getPastLoginTime(int userid){
         String query = "SELECT last_login FROM accounts WHERE id = ?";
         try{
             Connection con = DbConnection.getConnection();
             try(PreparedStatement pst = con.prepareStatement(query)){
                 pst.setInt(1,userid);
                 try(ResultSet rs = pst.executeQuery()){
-                    LocalDateTime last_login =(LocalDateTime) rs.getObject("last_login");
+                    LocalDate last_login = null;
+                    if(rs.next()){
+                    last_login = rs.getDate("last_login").toLocalDate();
+                    }
                     if(last_login==null){
                         return null;
                     }
