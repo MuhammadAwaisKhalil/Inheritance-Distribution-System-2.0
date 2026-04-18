@@ -277,4 +277,20 @@ public class InheritorsDetailController {
         stage.setTitle("Dashboard");
         stage.show();
     }
+    @FXML
+    private void gotoProfile(ActionEvent e)throws IOException{
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/org/example/demo/UserProfile.fxml")
+        );
+
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        //stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Profile");
+        stage.setScene(scene);
+        stage.show();
+
+    }
 }

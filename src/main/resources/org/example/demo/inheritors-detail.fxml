@@ -46,9 +46,9 @@
     <left>
         <VBox prefHeight="540.0" prefWidth="180.0" spacing="10.0" style="-fx-background-color: #2C3E50;" BorderPane.alignment="CENTER">
             <children>
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent; " text="Analytics(In detail)" textFill="WHITE" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goToAnalytics" style="-fx-background-color: transparent; " text="Analytics(In detail)" textFill="WHITE" />
                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #34495E" text="Inheritors" textFill="WHITE" />
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gotoProfile" style="-fx-background-color: transparent;" text="Settings" textFill="WHITE" />
             </children>
             <padding>
                 <Insets left="15.0" right="15.0" top="20.0" />
