@@ -211,10 +211,11 @@ public class HelloController {
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "465");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.ssl.enable", "false");
 
         String myemail = "sawasta556@gmail.com";
-        String mypassword = "zqli ejyg totp txwc";
+        String mypassword = "mnbj qzxa boag nqok";
 
         Session session = Session.getInstance(props, new Authenticator() {
             @Override
@@ -280,7 +281,7 @@ public class HelloController {
         List<Inheritor> allInheritors = InheritorDao.getAllInheritors(parentId);
         for (Inheritor inheritor: allInheritors){
             for(InheritorProperty p: inheritor.getProperties()){
-                if (PropertyDao.addProperty(p.getPropertyName(), (int)p.getAbsoluteValue(), inheritor.getId())){
+                if (PropertyDao.addProperty(p.getPropertyName() + "1", (int)p.getAbsoluteValue(), inheritor.getId())){
                     System.out.println("Property added to inheritor");
                 }else {
                     System.out.println("Property not added to inheritor");
@@ -290,18 +291,22 @@ public class HelloController {
 
     }
     private void calculateDayDifference(){
-        Integer parentID = UserDao.getCurrentParentId(UserSession.getCurrentUserId());
-        if(parentID!=null){
-           LocalDateTime parentLastLogin= UserDao.getPastLoginTime(parentID);
+        int parentID = UserDao.getCurrentParentId(UserSession.getCurrentUserId());
+        if(parentID!=0){
+           LocalDate parentLastLogin= UserDao.getPastLoginTime(parentID);
 
            if(parentLastLogin!=null){
-               LocalDateTime today = LocalDateTime.now();
+               LocalDate today = LocalDate.now();
 
                // 2. Calculate the difference in days
                long daysSinceLastLogin = ChronoUnit.DAYS.between(parentLastLogin, today);
 
                if(daysSinceLastLogin>30){
                    if(UserDao.updateDeathofParent(parentID)){
+
+                       notifyAllUsers(parentID);
+                       addPropertyToInheritor(parentID);
+
                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
                        alert.setTitle("Inna Lilla hi waInna ilaihi Rajioon");
                        alert.setHeaderText("");

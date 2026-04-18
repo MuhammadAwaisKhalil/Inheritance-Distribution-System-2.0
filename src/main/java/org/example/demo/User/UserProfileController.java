@@ -41,6 +41,7 @@ public class UserProfileController {
 
     public void populateFields(){
         userNameLabel.setText("@" + UserSession.getCurrentUsername());
+        System.out.println(UserSession.getCurrentUsername());
         accountName.setText(UserSession.getCurrentUsername());
         emailLabel.setText(UserSession.getCurrentUserEmail());
         if(UserSession.getCurrentDateOfBirth()!=null)
