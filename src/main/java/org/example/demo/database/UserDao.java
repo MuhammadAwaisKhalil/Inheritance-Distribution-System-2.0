@@ -154,9 +154,6 @@ public class UserDao {
         }
     }
 
-    public static List<User> getAllUsers(){
-
-    }
 
 
 

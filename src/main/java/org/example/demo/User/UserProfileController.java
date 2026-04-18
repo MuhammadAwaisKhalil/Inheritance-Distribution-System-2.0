@@ -27,8 +27,8 @@ public class UserProfileController {
 
     @FXML
     public void initialize(){
-        Image img = new Image(getClass().getResourceAsStream("org/example/demo/images/blank-profile-400x400-ffffff-circle-user1-80-402956.png"));
-        imageCircle.setFill(new ImagePattern(img));
+        //Image img = new Image(getClass().getResourceAsStream("org/example/demo/images/blank-profile-400x400-ffffff-circle-user1-80-402956.png"));
+        //imageCircle.setFill(new ImagePattern(img));
         populateFields();
     }
 
