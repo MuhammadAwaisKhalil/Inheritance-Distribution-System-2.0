@@ -14,6 +14,8 @@ import org.example.demo.database.UserDao;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddInheritorPopUp implements Initializable {
@@ -73,6 +75,9 @@ public class AddInheritorPopUp implements Initializable {
                     }
                     double shareVal = Double.parseDouble(share);
                     try {
+                        Assignproperty = propertyComboBox.getValue();
+
+
                         InheritorDao.assignProperty(PropertyDao.getPropertyId(Assignproperty.getProperty_name(), UserSession.getCurrentUserId()), UserDao.getIdByEmail(email), shareVal);
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Inheritance Assigned");
@@ -101,6 +106,9 @@ public class AddInheritorPopUp implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<Property> properties = PropertyDao.allProperties(UserSession.getCurrentUserId());
+        propertyComboBox.getItems().addAll(properties);
+
 
     }
 }
