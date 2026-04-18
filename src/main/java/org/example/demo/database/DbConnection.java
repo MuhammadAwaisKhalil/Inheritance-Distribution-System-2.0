@@ -6,7 +6,9 @@ import java.sql.SQLException;
 
 public class DbConnection {
 
-    private static final String URL = "jdbc:postgresql://ep-red-brook-anoa6kbb.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require";
+    private static final String URL = "jdbc:postgresql://ep-red-brook-anoa6kbb.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require"
+            ;
+    //jdbc:postgresql://ep-red-brook-anoa6kbb.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require
     private static final String user = "neondb_owner";
     private static final String password = "npg_zPdho9GrU1HO";
 
