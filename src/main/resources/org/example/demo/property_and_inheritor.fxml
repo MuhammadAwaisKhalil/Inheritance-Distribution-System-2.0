@@ -10,26 +10,38 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainlayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.Property.AssetsController">
+<AnchorPane fx:id="mainlayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="679.0" style="-fx-background-color: #F3F4F6;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.Property.AssetsController">
    <children>
-      <Line endX="360.0" endY="-41.600006103515625" layoutX="317.0" layoutY="326.0" startX="-316.01422119140625" startY="-41.600006103515625" />
-      <HBox layoutX="60.0" layoutY="38.0" prefHeight="31.0" prefWidth="546.0">
+      <Line endX="360.0" endY="-41.600006103515625" layoutX="317.0" layoutY="326.0" startX="-316.01422119140625" startY="-41.600006103515625" stroke="#D1D5DB" strokeWidth="2.0" />
+
+      <HBox alignment="CENTER_LEFT" layoutX="60.0" layoutY="38.0" prefHeight="31.0" prefWidth="420.0" spacing="10.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#addProperty" text="+" />
-            <ComboBox fx:id="propetyComboBox" prefHeight="26.0" prefWidth="344.0" promptText="Select Property" />
+            <Button mnemonicParsing="false" onAction="#addProperty" prefHeight="28.0" prefWidth="28.0" style="-fx-background-color: #6366F1; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="+" />
+            <ComboBox fx:id="propetyComboBox" prefHeight="28.0" prefWidth="344.0" promptText="Select Property" style="-fx-background-color: white; -fx-border-color: #D1D5DB; -fx-border-radius: 6; -fx-background-radius: 6;" />
          </children>
       </HBox>
-      <ListView fx:id="propertyList" layoutX="60.0" layoutY="69.0" prefHeight="200.0" prefWidth="371.0" />
-      <Button layoutX="60.0" layoutY="324.0" mnemonicParsing="false" onAction="#addUser" text="+" />
-      <ComboBox fx:id="userComboBox" layoutX="87.0" layoutY="324.0" prefHeight="26.0" prefWidth="344.0" promptText="Select Inheritor" />
-      <ListView fx:id="userList" layoutX="60.0" layoutY="357.0" prefHeight="200.0" prefWidth="371.0" />
-      <Button layoutX="496.0" layoutY="336.0" mnemonicParsing="false" onAction="#goToDashboard" prefHeight="26.0" prefWidth="130.0" style="-fx-border-radius: 10px;" text="Login" />
-      <Button layoutX="494.0" layoutY="469.0" mnemonicParsing="false" onAction="#assignInheritor" prefHeight="26.0" prefWidth="130.0" style="-fx-border-radius: 10;" text="Assign Inheritor" />
-      <TextField fx:id="shareField" layoutX="487.0" layoutY="408.0" promptText="e.g 75" />
-      <Label layoutX="493.0" layoutY="377.0" text="Enter share in property">
+
+      <ListView fx:id="propertyList" layoutX="60.0" layoutY="80.0" prefHeight="190.0" prefWidth="382.0" style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 4);" />
+
+      <HBox alignment="CENTER_LEFT" layoutX="60.0" layoutY="324.0" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#addUser" prefHeight="28.0" prefWidth="28.0" style="-fx-background-color: #6366F1; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="+" />
+            <ComboBox fx:id="userComboBox" prefHeight="28.0" prefWidth="344.0" promptText="Select Inheritor" style="-fx-background-color: white; -fx-border-color: #D1D5DB; -fx-border-radius: 6; -fx-background-radius: 6;" />
+         </children>
+      </HBox>
+
+      <ListView fx:id="userList" layoutX="60.0" layoutY="367.0" prefHeight="190.0" prefWidth="382.0" style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 4);" />
+
+      <Button layoutX="496.0" layoutY="336.0" mnemonicParsing="false" onAction="#goToDashboard" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #3B82F6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(59,130,246,0.3), 8, 0, 0, 4);" text="Login" />
+
+      <Label layoutX="487.0" layoutY="382.0" text="Enter share in property" textFill="#4B5563">
          <font>
-            <Font size="13.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+
+      <TextField fx:id="shareField" layoutX="487.0" layoutY="408.0" prefHeight="32.0" prefWidth="140.0" promptText="e.g 75" style="-fx-background-color: white; -fx-border-color: #D1D5DB; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 5;" />
+
+      <Button layoutX="492.0" layoutY="469.0" mnemonicParsing="false" onAction="#assignInheritor" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #10B981; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(16,185,129,0.3), 8, 0, 0, 4);" text="Assign Inheritor" />
    </children>
 </AnchorPane>
