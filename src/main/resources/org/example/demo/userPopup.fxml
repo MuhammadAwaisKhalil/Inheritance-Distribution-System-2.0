@@ -8,51 +8,47 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_LEFT" prefHeight="400.0" prefWidth="320.0" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.User.UserPopupController">
+<VBox alignment="CENTER_LEFT" prefHeight="430.0" prefWidth="360.0" spacing="15.0" stylesheets="@form-popup.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.User.UserPopupController" styleClass="popup-root">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
     <children>
-        <Label text="Add New User / Inheritor">
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-        </Label>
+        <Label text="Add New User / Inheritor" styleClass="popup-title" />
+        <Label text="Create an account with valid contact and date-of-birth details." styleClass="popup-subtitle" wrapText="true" />
 
-        <VBox spacing="5.0">
+        <VBox spacing="5.0" styleClass="field-group">
             <children>
-                <Label text="Username:" />
+                <Label text="Username" styleClass="field-label" />
                 <TextField fx:id="usernameField" promptText="Enter username" />
             </children>
         </VBox>
 
-        <VBox spacing="5.0">
+        <VBox spacing="5.0" styleClass="field-group">
             <children>
-                <Label text="Email:" />
+                <Label text="Email" styleClass="field-label" />
                 <TextField fx:id="emailField" promptText="e.g. user@example.com" />
             </children>
         </VBox>
 
-        <VBox spacing="5.0">
+        <VBox spacing="5.0" styleClass="field-group">
             <children>
-                <Label text="Password:" />
+                <Label text="Password" styleClass="field-label" />
                 <PasswordField fx:id="passwordField" promptText="Enter password" />
             </children>
         </VBox>
 
-        <VBox spacing="5.0">
+        <VBox spacing="5.0" styleClass="field-group">
             <children>
-                <Label text="Date of Birth:" />
+                <Label text="Date of Birth" styleClass="field-label" />
                 <DatePicker fx:id="dobPicker" prefWidth="280.0" promptText="Select date of birth" />
             </children>
         </VBox>
 
-        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+        <HBox alignment="CENTER_RIGHT" spacing="10.0" styleClass="popup-actions">
             <children>
-                <Button mnemonicParsing="false" onAction="#clickCancel" text="Cancel" />
-                <Button mnemonicParsing="false" onAction="#clickDone" style="-fx-background-color: #2196F3; -fx-text-fill: white;" text="Done" />
+                <Button mnemonicParsing="false" onAction="#clickCancel" text="Cancel" styleClass="btn-cancel" />
+                <Button mnemonicParsing="false" onAction="#clickDone" text="Save" styleClass="btn-primary" />
             </children>
             <VBox.margin>
                 <Insets top="10.0" />

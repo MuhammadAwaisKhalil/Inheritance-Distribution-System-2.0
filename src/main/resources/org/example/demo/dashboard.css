@@ -1,0 +1,175 @@
+.dashboard-root {
+    -fx-background-color: #f1f5f9;
+}
+
+.top-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dbe5f0;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 0 0 0;
+}
+
+.menu-label {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.page-title {
+    -fx-text-fill: #0f172a;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}
+
+.muted-label {
+    -fx-text-fill: #475569;
+    -fx-font-size: 12px;
+}
+
+.avatar-dot {
+    -fx-fill: #cbd5e1;
+    -fx-stroke: #94a3b8;
+    -fx-stroke-width: 1;
+}
+
+.sidebar {
+    -fx-background-color: linear-gradient(to bottom, #1f2937, #243447);
+}
+
+.sidebar-heading {
+    -fx-text-fill: #93a8bd;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 10 8 10;
+}
+
+.sidebar-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-background-radius: 8;
+    -fx-padding: 11 12 11 12;
+    -fx-alignment: CENTER_LEFT;
+    -fx-cursor: hand;
+}
+
+.sidebar-btn:hover {
+    -fx-background-color: rgba(148, 163, 184, 0.23);
+}
+
+.sidebar-btn-active {
+    -fx-background-color: rgba(59, 130, 246, 0.28);
+    -fx-border-color: rgba(191, 219, 254, 0.5);
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+}
+
+.dashboard-grid {
+    -fx-background-color: #f1f5f9;
+}
+
+.card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 14;
+    -fx-border-color: #dbe5f0;
+    -fx-border-radius: 14;
+    -fx-effect: dropshadow(three-pass-box, rgba(15, 23, 42, 0.08), 12, 0.15, 0, 3);
+}
+
+.analytics-card {
+    -fx-background-color: linear-gradient(to bottom right, #ffffff, #f8fbff);
+    -fx-background-radius: 14;
+    -fx-border-color: #dbe5f0;
+    -fx-border-radius: 14;
+    -fx-effect: dropshadow(three-pass-box, rgba(30, 41, 59, 0.10), 14, 0.15, 0, 4);
+}
+
+.analytics-title {
+    -fx-text-fill: #1f2937;
+}
+
+.analytics-subtitle {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 12px;
+    -fx-padding: 0 0 10 0;
+}
+
+.asset-chart {
+    -fx-padding: 8;
+}
+
+.asset-chart .chart-title {
+    -fx-text-fill: #0f172a;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.asset-chart .chart-legend {
+    -fx-background-color: rgba(241, 245, 249, 0.95);
+    -fx-background-radius: 10;
+    -fx-padding: 8 10 8 10;
+}
+
+.asset-chart .chart-legend-item {
+    -fx-text-fill: #334155;
+}
+
+.asset-chart .chart-legend-item-symbol {
+    -fx-padding: 6px;
+    -fx-background-radius: 8;
+}
+
+.asset-chart .chart-pie-label {
+    -fx-fill: #334155;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.asset-chart .chart-pie-label-line {
+    -fx-stroke: #94a3b8;
+}
+
+.asset-chart .default-color0.chart-pie { -fx-pie-color: #4f46e5; }
+.asset-chart .default-color1.chart-pie { -fx-pie-color: #06b6d4; }
+.asset-chart .default-color2.chart-pie { -fx-pie-color: #22c55e; }
+.asset-chart .default-color3.chart-pie { -fx-pie-color: #f59e0b; }
+.asset-chart .default-color4.chart-pie { -fx-pie-color: #ef4444; }
+.asset-chart .default-color5.chart-pie { -fx-pie-color: #8b5cf6; }
+.asset-chart .default-color6.chart-pie { -fx-pie-color: #14b8a6; }
+.asset-chart .default-color7.chart-pie { -fx-pie-color: #f97316; }
+
+.action-btn {
+    -fx-background-radius: 14px;
+    -fx-border-radius: 14px;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #334155;
+    -fx-cursor: hand;
+    -fx-padding: 12 16 12 16;
+}
+
+.action-btn:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(30, 41, 59, 0.22), 12, 0.16, 0, 3);
+}
+
+.action-btn-asset {
+    -fx-background-color: linear-gradient(to bottom right, #eff6ff, #bfdbfe);
+    -fx-border-color: #60a5fa;
+    -fx-text-fill: #1e3a8a;
+    -fx-border-width: 2;
+}
+
+.action-btn-asset:hover {
+    -fx-background-color: linear-gradient(to bottom right, #dbeafe, #93c5fd);
+}
+
+.action-btn-inheritor {
+    -fx-background-color: linear-gradient(to bottom right, #ffedd5, #fed7aa);
+    -fx-border-color: #fdba74;
+    -fx-border-width: 2;
+}
+
+.action-btn-inheritor:hover {
+    -fx-background-color: linear-gradient(to bottom right, #fed7aa, #fdba74);
+}
