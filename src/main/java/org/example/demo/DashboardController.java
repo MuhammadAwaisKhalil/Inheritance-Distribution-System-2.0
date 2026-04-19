@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.demo.Property.Property;
+import org.example.demo.Property.PropertyPopupController;
 import org.example.demo.User.UserSession;
 import org.example.demo.database.PropertyDao;
 
@@ -33,12 +34,7 @@ public class DashboardController {
 
     @FXML
     public void initialize() throws IOException {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/org/example/demo/inheritorsSnapshot.fxml")
-        );
-        Parent snapshotView = loader.load();
-        VBox.setVgrow(snapshotView, Priority.ALWAYS);
-        inheritorSnapshotContainer.getChildren().add(snapshotView);
+        reloadSnapshotPanel();
 
         assetPieChart.setLegendSide(Side.BOTTOM);
         assetPieChart.setLabelsVisible(true);
@@ -94,10 +90,10 @@ public class DashboardController {
             String propertyName = data.getName();
             double percentage = total > 0 ? (data.getPieValue() / total) * 100 : 0.0;
             double actualValue = actualValuesBySlice.getOrDefault(data, data.getPieValue());
-            data.setName(String.format(Locale.US, "%s (%.3f%%)", propertyName, percentage));
+            data.setName(String.format(Locale.US, "%s (%.2f%%)", propertyName, percentage));
             String tooltipText = String.format(
                     Locale.US,
-                    "%s\nActual value: PKR %,.0f\nVisual share: %.3f%%",
+                    "%s\nActual value: PKR %,.0f\nVisual share: %.2f%%",
                     propertyName,
                     actualValue,
                     percentage
@@ -138,6 +134,7 @@ public class DashboardController {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo/propertyPopup.fxml"));
         Parent root = loader.load();
+        PropertyPopupController popupController = loader.getController();
 
         Scene scene = new Scene(root);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -145,10 +142,28 @@ public class DashboardController {
         stage.setScene(scene);
         stage.showAndWait();
 
+        if (popupController.getNewProperty() != null) {
+            loadUserPropertyChartData();
+            refreshSnapshotPanel();
+        }
 
+    }
 
-        loadUserPropertyChartData();
+    private void refreshSnapshotPanel() {
+        try {
+            reloadSnapshotPanel();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to refresh total estate worth panel", e);
+        }
+    }
 
+    private void reloadSnapshotPanel() throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/org/example/demo/inheritorsSnapshot.fxml")
+        );
+        Parent snapshotView = loader.load();
+        VBox.setVgrow(snapshotView, Priority.ALWAYS);
+        inheritorSnapshotContainer.getChildren().setAll(snapshotView);
     }
     @FXML
     private void addInheritor()throws IOException{
@@ -194,6 +209,20 @@ public class DashboardController {
         stage.setScene(scene);
         stage.show();
 
+    }
+    @FXML
+    private void goToAssets(ActionEvent e) throws IOException {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/org/example/demo/property_and_inheritor.fxml")
+        );
+
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        stage.setTitle("Assets");
+        stage.setScene(scene);
+        stage.show();
     }
     @FXML
     private void goToAnalytics(ActionEvent e) throws IOException {

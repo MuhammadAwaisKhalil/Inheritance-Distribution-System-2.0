@@ -62,6 +62,7 @@
     -fx-font-weight: bold;
     -fx-text-fill: #334155;
     -fx-cursor: hand;
+    -fx-padding: 10 16 10 16;
 }
 
 .action-btn:hover {
@@ -69,12 +70,18 @@
 }
 
 .action-btn-asset {
-    -fx-background-color: linear-gradient(to bottom right, #dbeafe, #bfdbfe);
-    -fx-border-color: #93c5fd;
+    -fx-background-color: linear-gradient(to bottom right, #eff6ff, #bfdbfe);
+    -fx-border-color: #60a5fa;
+    -fx-text-fill: #1e3a8a;
+    -fx-border-width: 2;
 }
 
 .action-btn-inheritor {
     -fx-background-color: linear-gradient(to bottom right, #ffedd5, #fed7aa);
     -fx-border-color: #fdba74;
+}
+
+.action-btn-asset:hover {
+    -fx-background-color: linear-gradient(to bottom right, #dbeafe, #93c5fd);
 }
 
