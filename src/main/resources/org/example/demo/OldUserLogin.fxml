@@ -21,8 +21,12 @@
             <Label text="Password" styleClass="auth-label" />
             <PasswordField fx:id="passwordField1" promptText="Password" styleClass="auth-field" />
             <Region prefHeight="8.0" />
-            <Button mnemonicParsing="false" onAction="#userLogin" prefWidth="120.0" text="Login" styleClass="auth-primary-btn" />
-            <Button mnemonicParsing="false" onAction="#switchToRegister" prefWidth="120.0" text="Register" styleClass="auth-secondary-btn" />
+            <VBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#userLogin" prefWidth="180.0" text="Login" styleClass="auth-primary-btn" />
+                  <Button mnemonicParsing="false" onAction="#switchToRegister" prefWidth="180.0" text="Register" styleClass="auth-secondary-btn" />
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>
