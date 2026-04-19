@@ -12,7 +12,6 @@ public class UserSession {
 
 
     public static void setCurrentUsername(String username){
-
         currentUsername=username;
     }
     public static void setCurrentUserEmail(String email){

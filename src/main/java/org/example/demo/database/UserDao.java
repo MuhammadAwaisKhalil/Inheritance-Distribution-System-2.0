@@ -162,13 +162,17 @@ public class UserDao {
             try(PreparedStatement pst = con.prepareStatement(query)){
                 pst.setInt(1,id);
                 try(ResultSet rs = pst.executeQuery()){
-                    String userName = rs.getString("user_name");
-                    LocalDate dob =  rs.getDate("date_of_birth").toLocalDate();
-                    String email = rs.getString("email");
-                    String password = rs.getString("password");
-
-                    return new User(userName,email,password,dob);
-
+                    String userName;
+                    LocalDate dob;
+                    String email;
+                    String password;
+                    if(rs.next()) {
+                        userName = rs.getString("user_name");
+                        dob = rs.getDate("date_of_birth").toLocalDate();
+                        email = rs.getString("email");
+                        password = rs.getString("password");
+                        return new User(userName,email,password,dob);
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -294,7 +298,7 @@ public class UserDao {
         return null;
     }
     public static boolean updateDeathofParent(int parentID){
-        String query = "UPDATE accounts SET is_deceased = ? WHERE parent = ?";
+        String query = "UPDATE accounts SET is_deceased = ? WHERE parent = ? AND is_deceased = false";
         try{
             Connection con = DbConnection.getConnection();
             try(PreparedStatement pst = con.prepareStatement(query)){
@@ -302,7 +306,7 @@ public class UserDao {
                 pst.setInt(2,parentID);
 
                 int r = pst.executeUpdate();
-                if(r>0){
+                if(r==1){
                     return true;
                 }
                 else{
