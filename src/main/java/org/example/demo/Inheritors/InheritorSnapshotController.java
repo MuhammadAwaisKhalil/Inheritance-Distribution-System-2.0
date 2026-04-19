@@ -17,7 +17,6 @@ import org.example.demo.database.InheritorDao;
 import org.example.demo.database.PropertyDao;
 
 import java.io.IOException;
-import java.lang.classfile.Label;
 import java.util.List;
 
 public class InheritorSnapshotController {
@@ -34,8 +33,11 @@ public class InheritorSnapshotController {
     }
 
     private void loadData(){
-    totalWorth = PropertyDao.getTotalworth(UserSession.getCurrentUserId());
+        totalWorth = PropertyDao.getTotalworth(UserSession.getCurrentUserId());
         List<Inheritor> inheritors = InheritorDao.getAllInheritors(UserSession.getCurrentUserId());
+        if (inheritors == null) {
+            inheritors = List.of();
+        }
 
         totalWorthLabel.setText(String.format("PKR %,.0f", totalWorth));
         buildAccordion(inheritors);
@@ -63,7 +65,7 @@ public class InheritorSnapshotController {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        javafx.scene.control.Label shareLabel = new javafx.scene.control.Label(String.format("%.1f%%  •  PKR %,.0f", sharePercent, shareValue));
+        javafx.scene.control.Label shareLabel = new javafx.scene.control.Label(String.format("%.2f%%  •  PKR %,.0f", sharePercent, shareValue));
         shareLabel.getStyleClass().add("inheritor-share");
 
         header.getChildren().addAll(nameLabel, spacer, shareLabel);
