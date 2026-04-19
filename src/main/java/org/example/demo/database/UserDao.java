@@ -298,7 +298,7 @@ public class UserDao {
         return null;
     }
     public static boolean updateDeathofParent(int parentID){
-        String query = "UPDATE accounts SET is_deceased = ? WHERE parent = ? AND is_deceased = false";
+        String query = "UPDATE accounts SET is_deceased = ? WHERE id = ? AND is_deceased = false";
         try{
             Connection con = DbConnection.getConnection();
             try(PreparedStatement pst = con.prepareStatement(query)){
